@@ -171,7 +171,10 @@ if __name__ == '__main__':
         if cfg.run_args.warm_up_steps:
             warm_up_steps = cfg.run_args.warm_up_steps
         else:
-            warm_up_steps = cfg.run_args.max_steps // 2
+            num_train_samples = lbsn_dataset.sample_idx_train.shape[0]
+            num_epochs = cfg.run_args.epoch
+            total_steps = num_train_samples // cfg.run_args.batch_size * num_epochs
+            warm_up_steps = total_steps // 2
 
         init_step = 0
         if cfg.run_args.init_checkpoint:

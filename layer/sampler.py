@@ -211,7 +211,7 @@ class NeighborSampler(torch.utils.data.DataLoader):
         he_poi = self.ci_x[col[target_mask]][:, 1]
         im = coo_matrix((
             np.ones(row[target_mask].shape[0]),
-            (he_poi.numpy().astype(np.long), row[target_mask].numpy())
+            (he_poi.numpy().astype(np.longlong), row[target_mask].numpy())
         )).tocsr()
         self.he2he_jaccard = im.T * im
         self.he2he_jaccard = self.he2he_jaccard.tocoo()
